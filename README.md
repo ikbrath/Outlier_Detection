@@ -1,11 +1,10 @@
 <h1 align="center">Hi 👋, I'm Ikbar</h1>
 <h3 align="center">A passionate data scientist from Indonesia</h3>
-<img align="right" alt="Coding" width="200" lenght="100" src=https://media1.tenor.com/m/6zLDkzMegEoAAAAd/programmer.gif">
-
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=ikbrath&label=Profile%20views&color=0e75b6&style=flat" alt="ikbrath" /> </p>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=ikbrath" alt="ikbrath" /></a> </p>
+<img align="right" alt="Coding" width="200" lenght="100" src=https://media1.tenor.com/m/6zLDkzMegEoAAAAd/programmer.gif">
 
 - 🌱 I’m currently learning **Machine Learning, AI, Computer Science**
 
