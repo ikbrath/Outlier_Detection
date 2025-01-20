@@ -12,7 +12,7 @@
 
 - 📫 How to reach me **ikbaratallah@gmail.com**
 
-- ⚡ Fun fact **I think I'm always sleepy**
+- ⚡ Fun fact **I'm cool**
 
 <h3 align="left">Connect with me:</h3>
 <p align="left">
