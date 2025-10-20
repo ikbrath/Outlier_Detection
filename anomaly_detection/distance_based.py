@@ -44,6 +44,8 @@ class DistanceBasedDetector:
         self.threshold_ = None
         self.distances_ = None
         self.labels_ = None
+        self._nbrs = None
+        self._X_train = None
         
     def fit(self, X):
         """
@@ -60,13 +62,14 @@ class DistanceBasedDetector:
             Returns the instance itself
         """
         X = np.asarray(X)
+        self._X_train = X
         
         # Fit k-nearest neighbors
-        nbrs = NearestNeighbors(n_neighbors=self.n_neighbors + 1, metric=self.metric)
-        nbrs.fit(X)
+        self._nbrs = NearestNeighbors(n_neighbors=self.n_neighbors + 1, metric=self.metric)
+        self._nbrs.fit(X)
         
         # Calculate distances to k-nearest neighbors (excluding the point itself)
-        distances, _ = nbrs.kneighbors(X)
+        distances, _ = self._nbrs.kneighbors(X)
         # Average distance to k-nearest neighbors (excluding self at index 0)
         self.distances_ = np.mean(distances[:, 1:], axis=1)
         
@@ -92,15 +95,17 @@ class DistanceBasedDetector:
         labels : ndarray of shape (n_samples,)
             For each observation, returns 1 for inliers and -1 for outliers
         """
-        if self.threshold_ is None:
+        if self.threshold_ is None or self._nbrs is None:
             raise ValueError("Model must be fitted before calling predict()")
         
         X = np.asarray(X)
         
-        # We need the training data to calculate distances
-        # This is a simplified implementation
-        distances = np.array([np.mean(x) for x in X])  # Placeholder
-        return np.where(distances > self.threshold_, -1, 1)
+        # Calculate distances to k-nearest neighbors in training data
+        distances, _ = self._nbrs.kneighbors(X, n_neighbors=self.n_neighbors)
+        # Average distance to k-nearest neighbors
+        avg_distances = np.mean(distances, axis=1)
+        
+        return np.where(avg_distances > self.threshold_, -1, 1)
     
     def fit_predict(self, X):
         """
@@ -138,7 +143,11 @@ class DistanceBasedDetector:
                 raise ValueError("Model must be fitted first")
             return self.distances_
         
-        # For new data, calculate distances
+        if self._nbrs is None:
+            raise ValueError("Model must be fitted before calling decision_function()")
+        
+        # For new data, calculate distances to k-nearest neighbors in training data
         X = np.asarray(X)
-        # Simplified implementation
-        return np.array([np.mean(x) for x in X])
+        distances, _ = self._nbrs.kneighbors(X, n_neighbors=self.n_neighbors)
+        # Average distance to k-nearest neighbors
+        return np.mean(distances, axis=1)
