@@ -45,7 +45,6 @@ class DistanceBasedDetector:
         self.distances_ = None
         self.labels_ = None
         self._nbrs = None
-        self._X_train = None
         
     def fit(self, X):
         """
@@ -62,7 +61,6 @@ class DistanceBasedDetector:
             Returns the instance itself
         """
         X = np.asarray(X)
-        self._X_train = X
         
         # Fit k-nearest neighbors
         self._nbrs = NearestNeighbors(n_neighbors=self.n_neighbors + 1, metric=self.metric)
