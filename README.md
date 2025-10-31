@@ -2,6 +2,8 @@
 
 A comprehensive Python library for detecting anomalies and outliers in data using multiple state-of-the-art algorithms.
 
+The Execution Code in second branch: https://github.com/ikbrath/Outlier_Detection/tree/implement-anomaly-detection-algorithms 
+
 ## 🎯 Overview
 
 This library provides four powerful anomaly detection algorithms in a consistent, easy-to-use interface. Whether you're detecting fraud, network intrusions, manufacturing defects, or log anomalies, this library has you covered.
